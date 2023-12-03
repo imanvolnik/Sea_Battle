@@ -5,13 +5,18 @@ import time
 tk = Tk()
 app_running = True
 
-size_canvas_x = 600
-size_canvas_y = 600
-s_x = s_y = 10 #The size of table
+size_canvas_x = 595
+size_canvas_y = 595
+s_x = s_y = 7 #The size of table
 step_x = size_canvas_x // s_x # horizontal step
 step_y = size_canvas_y // s_y # vertical step
-
 menu_x = 250
+ships = 7
+ship_len1 = 4
+ship_len2 = 2
+ship_len3 = 1
+
+
 
 def on_closing():
     global app_running 
@@ -51,6 +56,18 @@ b0.place(x = size_canvas_x + 20, y = 40)
 b1 = Button(tk, text="Restart", command= button_restart)
 b1.place(x = size_canvas_x + 20, y = 100)
 
+def add_to_all(event):
+    _type = 0
+    if event.num == 3:
+        _type = 1
+    mouse_x = canvas.winfo_pointerx() - canvas.winfo_rootx()
+    mouse_y = canvas.winfo_pointery() - canvas.winfo_rooty()
+    ip_x = mouse_x // step_x
+    ip_y = mouse_y // step_y
+    print(ip_x, ip_y, "_type: ", _type)
+
+canvas.bind_all("<Button-1>", add_to_all) #left mouse button
+canvas.bind_all("<Button-3>", add_to_all) #right mouse button
 
 while app_running:
     if app_running:
